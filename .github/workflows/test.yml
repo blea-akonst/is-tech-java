@@ -1,0 +1,28 @@
+name: is-tech-labs-tests
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - 'master'
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Run "banks-java" with Maven
+        run: mvn -B test --file banks-java/pom.xml
+      - name: Run "kotiki-java" tests with Maven
+        run: mvn -B test --file kotiki-java/pom.xml
