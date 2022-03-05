@@ -4,19 +4,15 @@ import com.akonst.banks.accounts.BankAccount;
 import com.akonst.banks.clients.BankClient;
 import com.akonst.banks.service.BanksException;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Bank {
     private int _currentDate;
 
-    private ArrayList<BankClient> _clients;
-    private ArrayList<BankAccount> _accounts;
-
-    {
-        _clients = new ArrayList<>();
-        _accounts = new ArrayList<>();
-    }
+    private List<BankClient> clients = new ArrayList<>();
+    private List<BankAccount> _accounts = new ArrayList<>();
 
     public int standardDepositTerm;
     public double debitPercent;
@@ -45,9 +41,9 @@ public class Bank {
     }
 
     public BankClient addClient(BankClient client) {
-        _clients.add(client);
+        clients.add(client);
 
-        return _clients.get(_clients.indexOf(client));
+        return client;
     }
 
     public void addAccount(BankAccount account) {

@@ -10,13 +10,13 @@ public class DebitAccount extends BankAccount {
         double monthlyPart = (debitPercent / 12) / 100;
         double chargingPercent = monthsToCharge * monthlyPart;
 
-        double chargingSum = _balance * chargingPercent;
+        double chargingSum = balance * chargingPercent;
         refill(chargingSum);
     }
 
     @Override
     public double withdraw(double sum) throws BanksException {
-        if (_balance - sum < 0) {
+        if (balance - sum < 0) {
             throw new BanksException("You can't take more money than there is in the account!");
         }
 
@@ -24,8 +24,8 @@ public class DebitAccount extends BankAccount {
             throw new BanksException("Please, fill your address and passport data!");
         }
 
-        _balance -= sum;
+        balance -= sum;
 
-        return _balance;
+        return balance;
     }
 }

@@ -13,7 +13,7 @@ public class CreditAccount extends BankAccount {
 
     @Override
     public double withdraw(double sum) throws BanksException {
-        if (_balance < 0 && Math.abs(_balance - sum) > creditLimit) {
+        if (balance < 0 && Math.abs(balance - sum) > creditLimit) {
             throw new BanksException("You can't take more money than there is in the account!");
         }
 
@@ -21,8 +21,8 @@ public class CreditAccount extends BankAccount {
             throw new BanksException("Please, fill your address and passport data!");
         }
 
-        _balance -= sum;
+        balance -= sum;
 
-        return _balance;
+        return balance;
     }
 }

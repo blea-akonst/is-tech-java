@@ -5,7 +5,7 @@ import com.akonst.banks.accounts.DepositAccount;
 import com.akonst.banks.clients.BankClient;
 
 public class DepositAccountFactory {
-    public static DepositAccount MakeAccount(Bank bank, BankClient owner, int depositExpiryDate) {
+    public static DepositAccount makeAccount(Bank bank, BankClient owner, int depositExpiryDate) {
         var account = new DepositAccount();
 
         account.bankName = bank.bankName;

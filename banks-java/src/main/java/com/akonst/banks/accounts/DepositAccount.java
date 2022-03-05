@@ -16,12 +16,12 @@ public class DepositAccount extends BankAccount {
             return;
         }
 
-        percent = _balance < depositPercentIncreasingBorderSum ? firstDepositPercent : secondDepositPercent;
+        percent = balance < depositPercentIncreasingBorderSum ? firstDepositPercent : secondDepositPercent;
 
         double monthlyPart = (percent / 12) / 100;
         double chargingPercent = monthsToCharge * monthlyPart;
 
-        double chargingSum = _balance * chargingPercent;
+        double chargingSum = balance * chargingPercent;
         refill(chargingSum);
     }
 
@@ -31,7 +31,7 @@ public class DepositAccount extends BankAccount {
             throw new BanksException("The term of the deposit has not ended!");
         }
 
-        if (_balance - sum < 0) {
+        if (balance - sum < 0) {
             throw new BanksException("Not enough money in the account!");
         }
 
@@ -39,8 +39,8 @@ public class DepositAccount extends BankAccount {
             throw new BanksException("Please, fill your address and passport data!");
         }
 
-        _balance -= sum;
+        balance -= sum;
 
-        return _balance;
+        return balance;
     }
 }

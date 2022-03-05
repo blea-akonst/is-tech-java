@@ -6,36 +6,31 @@ import com.akonst.banks.service.BanksException;
 import com.akonst.banks.transactions.BankTransaction;
 import com.akonst.banks.transactions.BankTransactionBuilder;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class CentralBank {
-    private int _currentDate;
-    private ArrayList<Bank> _banks;
-    private ArrayList<BankTransaction> _transactions;
-    private ArrayList<BankClient> _subscribers;
+    private int currentDate;
+    private List<Bank> banks = new ArrayList<>();
+    private List<BankTransaction> transactions = new ArrayList<>();
+    private List<BankClient> subscribers = new ArrayList<>();
 
-    {
-        _banks = new ArrayList<>();
-        _transactions = new ArrayList<>();
-        _subscribers = new ArrayList<>();
-    }
-
-    private int _currentTransactionId = 0;
+    private int _currentTransactionId;
 
     public Bank addBank(Bank bank) throws BanksException {
-        if (_banks.contains(bank)) {
+        if (banks.contains(bank)) {
             throw new BanksException("This bank is exists!");
         }
 
-        _banks.add(bank);
+        banks.add(bank);
 
-        return _banks.get(_banks.indexOf(bank));
+        return banks.get(banks.indexOf(bank));
     }
 
     public Bank getBank(String bankName) throws BanksException {
         Bank bank = null;
 
-        for (Bank b : _banks) {
+        for (Bank b : banks) {
             if (b.bankName.equals(bankName)) {
                 bank = b;
                 break;
@@ -52,7 +47,7 @@ public class CentralBank {
     public void moneyTransfer(BankAccount sendersAccount, BankAccount receiversAccount, double sum) throws BanksException {
         Bank sendersBank = null;
 
-        for (Bank b : _banks) {
+        for (Bank b : banks) {
             if (b.bankName.equals(sendersAccount.bankName)) {
                 sendersBank = b;
                 break;
@@ -80,12 +75,12 @@ public class CentralBank {
                 .setTransactionId(_currentTransactionId++)
                 .getTransaction();
 
-        _transactions.add(transaction);
+        transactions.add(transaction);
     }
 
     // percent and commission charging causes in time increasing
     public void increaseTime(int days) {
-        _currentDate += days;
+        currentDate += days;
         notifyBanksAboutCurrentDate();
     }
 
@@ -95,22 +90,22 @@ public class CentralBank {
         Bank sendersBank = null;
         Bank receiversBank = null;
 
-        for (BankTransaction bt : _transactions) {
-            if (bt.id == transactionId) {
+        for (BankTransaction bt : transactions) {
+            if (bt.getId() == transactionId) {
                 transaction = bt;
                 break;
             }
         }
 
-        for (Bank b : _banks) {
-            if (b.bankName.equals(transaction.sendersBank)) {
+        for (Bank b : banks) {
+            if (b.bankName.equals(transaction.getSendersBank())) {
                 sendersBank = b;
                 break;
             }
         }
 
-        for (Bank b : _banks) {
-            if (b.bankName.equals(transaction.receiversBank)) {
+        for (Bank b : banks) {
+            if (b.bankName.equals(transaction.getReceiversBank())) {
                 receiversBank = b;
                 break;
             }
@@ -120,27 +115,27 @@ public class CentralBank {
             throw new BanksException("This transaction doesn't exists!");
         }
 
-        BankAccount sendersAccount = sendersBank.getAccount(transaction.senderId);
-        BankAccount receiversAccount = receiversBank.getAccount(transaction.receiverId);
+        BankAccount sendersAccount = sendersBank.getAccount(transaction.getSenderId());
+        BankAccount receiversAccount = receiversBank.getAccount(transaction.getReceiverId());
 
-        sendersAccount.refill(transaction.sum);
-        receiversAccount.immediatelyWithdraw(transaction.sum);
+        sendersAccount.refill(transaction.getSum());
+        receiversAccount.immediatelyWithdraw(transaction.getSum());
 
-        _transactions.remove(transaction);
+        transactions.remove(transaction);
     }
 
     private void notifyBanksAboutCurrentDate() {
-        for (Bank b : _banks) {
-            b.setCurrentDate(_currentDate);
+        for (Bank b : banks) {
+            b.setCurrentDate(currentDate);
         }
     }
 
     private void bankUpdatesSubscribe(BankClient client) {
-        _subscribers.add(client);
+        subscribers.add(client);
     }
 
     private void notifyClientsAboutAction(String info) {
-        for (BankClient client : _subscribers) {
+        for (BankClient client : subscribers) {
             notify(client, info);
         }
     }

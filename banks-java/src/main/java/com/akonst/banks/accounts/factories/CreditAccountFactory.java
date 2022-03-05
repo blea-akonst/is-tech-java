@@ -5,7 +5,7 @@ import com.akonst.banks.accounts.CreditAccount;
 import com.akonst.banks.clients.BankClient;
 
 public class CreditAccountFactory {
-    public static CreditAccount MakeAccount(Bank bank, BankClient owner) {
+    public static CreditAccount makeAccount(Bank bank, BankClient owner) {
         var account = new CreditAccount();
 
         account.bankName = bank.bankName;

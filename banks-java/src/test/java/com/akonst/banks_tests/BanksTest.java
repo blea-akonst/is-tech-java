@@ -67,7 +67,7 @@ public class BanksTest {
 
         client = _bankTwo.addClient(client);
 
-        _accountBankTwo = CreditAccountFactory.MakeAccount(_bankTwo, client);
+        _accountBankTwo = CreditAccountFactory.makeAccount(_bankTwo, client);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class BanksTest {
 
     @Test
     public void clientInfoIsIncompleteAndHeTriesWithdrawMoney_ThrowsException() {
-        _accountBankOneDebit.owner.passportNumber = "";
+        _accountBankOneDebit.owner.setPassportNumber("");
         _accountBankOneDebit.refill(1000);
 
         Assertions.assertThrows(BanksException.class, () -> _accountBankOneDebit.withdraw(1000));

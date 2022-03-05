@@ -4,7 +4,7 @@ import com.akonst.banks.clients.BankClient;
 import com.akonst.banks.service.BanksException;
 
 public abstract class BankAccount {
-    protected double _balance;
+    protected double balance;
 
     public int id;
     public int currentDate;
@@ -12,19 +12,19 @@ public abstract class BankAccount {
     public BankClient owner;
 
     public double refill(double sum) {
-        _balance += sum;
+        balance += sum;
 
-        return _balance;
+        return balance;
     }
 
     public double immediatelyWithdraw(double sum) {
-        _balance -= sum;
+        balance -= sum;
 
-        return _balance;
+        return balance;
     }
 
     public double getBalance() {
-        return _balance;
+        return balance;
     }
 
     public abstract void chargePercentsAndCommissions(int monthsToCharge);

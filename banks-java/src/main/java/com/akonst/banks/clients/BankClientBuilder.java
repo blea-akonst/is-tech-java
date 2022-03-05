@@ -1,36 +1,32 @@
 package com.akonst.banks.clients;
 
 public class BankClientBuilder {
-    private BankClient _client = new BankClient();
+    private String name;
+    private String surname;
+    private String address;
+    private String passportNumber;
 
     public BankClientBuilder setName(String name) {
-        _client.name = name;
+        this.name = name;
         return this;
     }
 
     public BankClientBuilder setSurname(String surname) {
-        _client.surname = surname;
+        this.surname = surname;
         return this;
     }
 
     public BankClientBuilder setAddress(String address) {
-        _client.address = address;
+        this.address = address;
         return this;
     }
 
     public BankClientBuilder setPassportNumber(String number) {
-        _client.passportNumber = number;
+        this.passportNumber = number;
         return this;
     }
 
     public BankClient getClient() {
-        BankClient res = _client;
-        reset();
-
-        return res;
-    }
-
-    private void reset() {
-        _client = new BankClient();
+        return new BankClient(name, surname, address, passportNumber);
     }
 }
