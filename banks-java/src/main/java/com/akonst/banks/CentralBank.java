@@ -30,9 +30,9 @@ public class CentralBank {
     public Bank getBank(String bankName) throws BanksException {
         Bank bank = null;
 
-        for (Bank b : banks) {
-            if (b.bankName.equals(bankName)) {
-                bank = b;
+        for (Bank curBank : banks) {
+            if (curBank.getBankName().equals(bankName)) {
+                bank = curBank;
                 break;
             }
         }
@@ -47,9 +47,9 @@ public class CentralBank {
     public void moneyTransfer(BankAccount sendersAccount, BankAccount receiversAccount, double sum) throws BanksException {
         Bank sendersBank = null;
 
-        for (Bank b : banks) {
-            if (b.bankName.equals(sendersAccount.bankName)) {
-                sendersBank = b;
+        for (Bank bank : banks) {
+            if (bank.getBankName().equals(sendersAccount.bankName)) {
+                sendersBank = bank;
                 break;
             }
         }
@@ -58,7 +58,7 @@ public class CentralBank {
             throw new BanksException("This bank doesn't exists!");
         }
 
-        if (sendersAccount.owner.isIncorrectClient() && sum > sendersBank.untrustedClientTransactionLimit) {
+        if (sendersAccount.owner.isIncorrectClient() && sum > sendersBank.getUntrustedClientTransactionLimit()) {
             throw new BanksException("Please, enter your email and passport data for transaction for this sum!");
         }
 
@@ -97,16 +97,16 @@ public class CentralBank {
             }
         }
 
-        for (Bank b : banks) {
-            if (b.bankName.equals(transaction.getSendersBank())) {
-                sendersBank = b;
+        for (Bank bank : banks) {
+            if (bank.getBankName().equals(transaction.getSendersBank())) {
+                sendersBank = bank;
                 break;
             }
         }
 
-        for (Bank b : banks) {
-            if (b.bankName.equals(transaction.getReceiversBank())) {
-                receiversBank = b;
+        for (Bank bank : banks) {
+            if (bank.getBankName().equals(transaction.getReceiversBank())) {
+                receiversBank = bank;
                 break;
             }
         }
@@ -125,8 +125,8 @@ public class CentralBank {
     }
 
     private void notifyBanksAboutCurrentDate() {
-        for (Bank b : banks) {
-            b.setCurrentDate(currentDate);
+        for (Bank bank : banks) {
+            bank.setCurrentDate(currentDate);
         }
     }
 

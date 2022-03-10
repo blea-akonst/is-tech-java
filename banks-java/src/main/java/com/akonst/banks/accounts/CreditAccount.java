@@ -21,8 +21,6 @@ public class CreditAccount extends BankAccount {
             throw new BanksException("Please, fill your address and passport data!");
         }
 
-        balance -= sum;
-
-        return balance;
+        return balance -= sum;
     }
 }

@@ -8,9 +8,9 @@ public class CreditAccountFactory {
     public static CreditAccount makeAccount(Bank bank, BankClient owner) {
         var account = new CreditAccount();
 
-        account.bankName = bank.bankName;
-        account.creditComission = bank.creditComission;
-        account.creditLimit = bank.creditLimit;
+        account.bankName = bank.getBankName();
+        account.creditComission = bank.getCreditComission();
+        account.creditLimit = bank.getCreditLimit();
         account.owner = owner;
 
         return account;

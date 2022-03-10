@@ -10,13 +10,11 @@ public class DepositAccount extends BankAccount {
 
     @Override
     public void chargePercentsAndCommissions(int monthsToCharge) {
-        double percent;
-
         if (depositExpiryDate < currentDate) {
             return;
         }
 
-        percent = balance < depositPercentIncreasingBorderSum ? firstDepositPercent : secondDepositPercent;
+        double percent = balance < depositPercentIncreasingBorderSum ? firstDepositPercent : secondDepositPercent;
 
         double monthlyPart = (percent / 12) / 100;
         double chargingPercent = monthsToCharge * monthlyPart;
@@ -39,8 +37,6 @@ public class DepositAccount extends BankAccount {
             throw new BanksException("Please, fill your address and passport data!");
         }
 
-        balance -= sum;
-
-        return balance;
+        return balance -= sum;
     }
 }

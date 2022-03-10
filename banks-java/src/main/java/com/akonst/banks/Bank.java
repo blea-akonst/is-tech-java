@@ -14,19 +14,35 @@ public class Bank {
     private List<BankClient> clients = new ArrayList<>();
     private List<BankAccount> accounts = new ArrayList<>();
 
-    public int standardDepositTerm;
-    public double debitPercent;
-    public double firstDepositPercent;
-    public double secondDepositPercent;
-    public double depositPercentIncreasingBorderSum;
-    public double creditComission;
-    public double creditLimit;
-    public double untrustedClientTransactionLimit;
+    private int standardDepositTerm;
+    private double debitPercent;
+    private double firstDepositPercent;
+    private double secondDepositPercent;
+    private double depositPercentIncreasingBorderSum;
+    private double creditComission;
+    private double creditLimit;
+    private double untrustedClientTransactionLimit;
 
-    public String bankName;
+    private String bankName;
 
-    public int getCurrentDate() {
-        return currentDate;
+    public Bank(String bankName,
+                int standardDepositTerm,
+                double debitPercent,
+                double firstDepositPercent,
+                double secondDepositPercent,
+                double depositPercentIncreasingBorderSum,
+                double creditComission,
+                double creditLimit,
+                double untrustedClientTransactionLimit) {
+        this.bankName = bankName;
+        this.standardDepositTerm = standardDepositTerm;
+        this.debitPercent = debitPercent;
+        this.firstDepositPercent = firstDepositPercent;
+        this.secondDepositPercent = secondDepositPercent;
+        this.depositPercentIncreasingBorderSum = depositPercentIncreasingBorderSum;
+        this.creditComission = creditComission;
+        this.creditLimit = creditLimit;
+        this.untrustedClientTransactionLimit = untrustedClientTransactionLimit;
     }
 
     public void setCurrentDate(int date) {
@@ -82,11 +98,51 @@ public class Bank {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bank bank = (Bank) o;
-        return bankName.equals(bank.bankName);
+        return bankName.equals(bank.getBankName());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(bankName);
+    }
+
+    public int getStandardDepositTerm() {
+        return standardDepositTerm;
+    }
+
+    public double getDebitPercent() {
+        return debitPercent;
+    }
+
+    public double getFirstDepositPercent() {
+        return firstDepositPercent;
+    }
+
+    public double getSecondDepositPercent() {
+        return secondDepositPercent;
+    }
+
+    public double getDepositPercentIncreasingBorderSum() {
+        return depositPercentIncreasingBorderSum;
+    }
+
+    public double getCreditComission() {
+        return creditComission;
+    }
+
+    public double getCreditLimit() {
+        return creditLimit;
+    }
+
+    public double getUntrustedClientTransactionLimit() {
+        return untrustedClientTransactionLimit;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public int getCurrentDate() {
+        return currentDate;
     }
 }

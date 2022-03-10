@@ -12,15 +12,11 @@ public abstract class BankAccount {
     public BankClient owner;
 
     public double refill(double sum) {
-        balance += sum;
-
-        return balance;
+        return balance += sum;
     }
 
     public double immediatelyWithdraw(double sum) {
-        balance -= sum;
-
-        return balance;
+        return balance -= sum;
     }
 
     public double getBalance() {

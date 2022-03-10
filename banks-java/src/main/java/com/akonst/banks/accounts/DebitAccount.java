@@ -7,8 +7,7 @@ public class DebitAccount extends BankAccount {
 
     @Override
     public void chargePercentsAndCommissions(int monthsToCharge) {
-        double monthlyPart = (debitPercent / 12) / 100;
-        double chargingPercent = monthsToCharge * monthlyPart;
+        double chargingPercent = monthsToCharge * (debitPercent / 12) / 100;
 
         double chargingSum = balance * chargingPercent;
         refill(chargingSum);
@@ -24,8 +23,6 @@ public class DebitAccount extends BankAccount {
             throw new BanksException("Please, fill your address and passport data!");
         }
 
-        balance -= sum;
-
-        return balance;
+        return balance -= sum;
     }
 }

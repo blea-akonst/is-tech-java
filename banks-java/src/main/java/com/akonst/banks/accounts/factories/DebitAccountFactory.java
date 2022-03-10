@@ -8,9 +8,9 @@ public class DebitAccountFactory {
     public static DebitAccount makeAccount(Bank bank, BankClient owner) {
         var account = new DebitAccount();
 
-        account.bankName = bank.bankName;
+        account.bankName = bank.getBankName();
         account.owner = owner;
-        account.debitPercent = bank.debitPercent;
+        account.debitPercent = bank.getDebitPercent();
 
         return account;
     }
