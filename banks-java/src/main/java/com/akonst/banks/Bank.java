@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Bank {
-    private int _currentDate;
+    private int currentDate;
 
     private List<BankClient> clients = new ArrayList<>();
-    private List<BankAccount> _accounts = new ArrayList<>();
+    private List<BankAccount> accounts = new ArrayList<>();
 
     public int standardDepositTerm;
     public double debitPercent;
@@ -26,17 +26,17 @@ public class Bank {
     public String bankName;
 
     public int getCurrentDate() {
-        return _currentDate;
+        return currentDate;
     }
 
     public void setCurrentDate(int date) {
-        _currentDate = date;
+        currentDate = date;
 
-        for (BankAccount acc : _accounts) {
+        for (BankAccount acc : accounts) {
             int prevDate = acc.currentDate;
-            int monthsToCharge = ((prevDate % 30) + _currentDate - prevDate) / 30;
+            int monthsToCharge = ((prevDate % 30) + currentDate - prevDate) / 30;
             acc.chargePercentsAndCommissions(monthsToCharge);
-            acc.currentDate = _currentDate;
+            acc.currentDate = currentDate;
         }
     }
 
@@ -47,9 +47,9 @@ public class Bank {
     }
 
     public void addAccount(BankAccount account) {
-        int id = _accounts.size();
+        int id = accounts.size();
         account.id = id;
-        _accounts.add(account);
+        accounts.add(account);
     }
 
     public double refill(BankAccount account, double sum) {
@@ -63,7 +63,7 @@ public class Bank {
     public BankAccount getAccount(int id) throws BanksException {
         BankAccount account = null;
 
-        for (BankAccount acc : _accounts) {
+        for (BankAccount acc : accounts) {
             if (acc.id == id) {
                 account = acc;
                 break;

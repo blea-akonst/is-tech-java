@@ -15,7 +15,7 @@ public class CentralBank {
     private List<BankTransaction> transactions = new ArrayList<>();
     private List<BankClient> subscribers = new ArrayList<>();
 
-    private int _currentTransactionId;
+    private int currentTransactionId;
 
     public Bank addBank(Bank bank) throws BanksException {
         if (banks.contains(bank)) {
@@ -72,7 +72,7 @@ public class CentralBank {
                 .setSenderId(sendersAccount.id)
                 .setReceiversBank(receiversAccount.bankName)
                 .setReceiverId(receiversAccount.id)
-                .setTransactionId(_currentTransactionId++)
+                .setTransactionId(currentTransactionId++)
                 .getTransaction();
 
         transactions.add(transaction);
