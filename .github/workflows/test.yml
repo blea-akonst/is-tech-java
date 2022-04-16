@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Setup Maven Action
-        uses: s4u/setup-maven-action@< version >
+        uses: s4u/setup-maven-action@1.2.1
         with:
           java-version: 17
           maven-version: 3.6.3
 
-      - name: Run "banks-java" with Maven
+      - name: Run "banks-java" tests with Maven
         run: mvn -B test --file banks-java/pom.xml
 
       - name: Run "kotiki-java" tests with Maven
