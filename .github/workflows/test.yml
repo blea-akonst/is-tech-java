@@ -23,6 +23,6 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run "banks-java" with Maven
-        run: mvn -B test --file banks-java/pom.xml
+        run: mvn -B test --file banks-java/pom.xml -Dmaven=3.6.3
       - name: Run "kotiki-java" tests with Maven
-        run: mvn -B test --file kotiki-java/pom.xml
+        run: mvn -B test --file kotiki-java/pom.xml -Dmaven=3.6.3
